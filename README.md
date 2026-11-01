@@ -4,7 +4,7 @@ An enterprise-grade **Retrieval-Augmented Generation (RAG)** assistant built wit
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
 - **Multi-Source Paper Ingestion**:
   - Pre-bundled landmark AI papers (*Attention Is All You Need*, *LoRA*, *RAG*, *Mistral 7B*).
@@ -44,7 +44,7 @@ An enterprise-grade **Retrieval-Augmented Generation (RAG)** assistant built wit
 
 ---
 
-## 📐 System Architecture
+## System Architecture
 
 ```mermaid
 flowchart TD
@@ -65,8 +65,8 @@ flowchart TD
     end
 
     subgraph VectorStores["4. Dual Vector Stores"]
-        HF --> FAISS["⚡ FAISS Vector Store\n(In-Memory Index)"]
-        HF --> Chroma["🗄️ ChromaDB\n(Persistent Collections)"]
+        HF --> FAISS["FAISS Vector Store\n(In-Memory Index)"]
+        HF --> Chroma["ChromaDB\n(Persistent Collections)"]
     end
 
     subgraph Retrieval["5. Retrieval & Context Assembly"]
@@ -93,7 +93,7 @@ flowchart TD
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 PROJ2/
@@ -136,7 +136,7 @@ PROJ2/
 
 ---
 
-## 🚀 Quickstart
+## Quickstart
 
 ### 1. Installation
 
@@ -164,7 +164,7 @@ Open `http://localhost:8501` in your browser.
 
 ---
 
-## 💻 CLI Usage
+## CLI Usage
 
 The project includes an interactive CLI:
 
@@ -203,7 +203,7 @@ python cli.py arxiv-download --id 2005.11401
 
 ---
 
-## 🧪 Running Tests
+## Running Tests
 
 Run the complete test suite:
 
@@ -223,7 +223,7 @@ All 8 unit and integration tests verify:
 
 ---
 
-## ⚙️ Configuration & Environment Variables
+## Configuration & Environment Variables
 
 | Variable | Description | Default |
 |---|---|---|

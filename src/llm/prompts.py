@@ -29,16 +29,16 @@ Generate an executive, high-level summary of the research paper based ONLY on th
 </context>
 
 Format your response in Markdown:
-### 🎯 Executive Overview
+### Executive Overview
 (2-3 paragraphs explaining the core research problem, why previous approaches failed or were limited, and the authors' key insight.)
 
-### 🌟 Key Innovation
+### Key Innovation
 (What is the exact novel mechanism, formula, or architecture proposed in this paper?)
 
-### 📊 Principal Findings
+### Principal Findings
 (Primary benchmark results, metrics, efficiency gains, or empirical breakthroughs with numbers where available.)
 
-### 💡 Practical Impact
+### Practical Impact
 (Why this paper matters for researchers and ML practitioners.)"""
 
 

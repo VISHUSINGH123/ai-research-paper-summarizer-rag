@@ -16,7 +16,6 @@ import streamlit as st
 # Configure page layout and aesthetics
 st.set_page_config(
     page_title="AI Research Paper Summarizer (RAG)",
-    page_icon="📑",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -129,7 +128,7 @@ def process_and_index_document(source, file_name, chunk_size, chunk_overlap, emb
 
 # Sidebar Controls: Engine & Advanced Config
 with st.sidebar:
-    st.markdown("### ⚙️ Engine Settings")
+    st.markdown("### Engine Settings")
 
     active_vector_engine = st.selectbox(
         "Active Vector Engine",
@@ -151,7 +150,7 @@ with st.sidebar:
         top_k = st.slider("Top-K Retrieved Passages", 2, 10, 5)
 
     st.markdown("---")
-    st.markdown("### 🤖 Open-Source LLM Provider")
+    st.markdown("### Open-Source LLM Provider")
 
     llm_backend = st.selectbox(
         "LLM Backend",
@@ -176,7 +175,7 @@ with st.sidebar:
             os.environ["GROQ_API_KEY"] = groq_api_key
 
     st.markdown("---")
-    st.markdown("### 🌐 Alternate Sourcing")
+    st.markdown("### Alternate Sourcing")
     with st.expander("Download from arXiv by ID/URL", expanded=False):
         arxiv_input = st.text_input("arXiv ID (e.g. 1706.03762)", placeholder="1706.03762")
         if st.button("Fetch & Process arXiv Paper", use_container_width=True):
@@ -227,13 +226,13 @@ with st.sidebar:
 # MAIN DASHBOARD AREA
 # ==========================================
 
-st.markdown('<div class="main-title">📑 AI Research Paper Summarizer (RAG)</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">AI Research Paper Summarizer (RAG)</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle">Upload any research paper (PDF) to chunk, embed in FAISS & ChromaDB, and generate grounded summaries & answers using Llama 3 / Mistral.</div>', unsafe_allow_html=True)
 
 # ------------------------------------------
-# 📤 PROMINENT CUSTOM PAPER UPLOAD SECTION
+# PROMINENT CUSTOM PAPER UPLOAD SECTION
 # ------------------------------------------
-st.markdown("### 📤 Upload Your Own Research Paper")
+st.markdown("### Upload Research Paper")
 
 col_upload, col_upload_btn = st.columns([3, 1])
 with col_upload:
@@ -246,13 +245,13 @@ with col_upload:
 with col_upload_btn:
     st.write("") # spacing
     st.write("")
-    manual_reprocess = st.button("⚡ Process / Re-index", type="primary", use_container_width=True)
+    manual_reprocess = st.button("Process / Re-index", type="primary", use_container_width=True)
 
 # Auto-process uploaded file when a new file is uploaded
 if uploaded_pdf is not None:
     file_bytes_name = f"{uploaded_pdf.name}_{uploaded_pdf.size}"
     if st.session_state.last_processed_file != file_bytes_name or manual_reprocess:
-        with st.spinner(f"🚀 Processing '{uploaded_pdf.name}': extracting text, chunking sections, computing embeddings, and building FAISS & ChromaDB indices..."):
+        with st.spinner(f"Processing '{uploaded_pdf.name}': extracting text, chunking sections, computing embeddings, and building FAISS & ChromaDB indices..."):
             try:
                 # Read bytes and process
                 pdf_bytes = io.BytesIO(uploaded_pdf.getvalue())
@@ -265,7 +264,7 @@ if uploaded_pdf is not None:
                     active_engine=active_vector_engine
                 )
                 st.session_state.last_processed_file = file_bytes_name
-                st.success(f"✅ Successfully ingested & indexed **'{paper_doc.title}'** ({len(chunks)} chunks across {paper_doc.total_pages} pages) into FAISS & ChromaDB!")
+                st.success(f"Successfully ingested & indexed **'{paper_doc.title}'** ({len(chunks)} chunks across {paper_doc.total_pages} pages) into FAISS & ChromaDB.")
             except Exception as e:
                 st.error(f"Error processing uploaded PDF: {e}")
 
@@ -295,7 +294,7 @@ if store_mgr:
 if paper:
     st.markdown(f"""
     <div class="active-paper-card">
-        <span style="font-size: 1.15rem; font-weight: 700; color: #1E293B;">📖 Active Paper: {paper.title}</span><br>
+        <span style="font-size: 1.15rem; font-weight: 700; color: #1E293B;">Active Paper: {paper.title}</span><br>
         <span style="color: #475569; font-size: 0.92rem;"><b>File:</b> {paper.file_name} &nbsp;|&nbsp; <b>Authors:</b> {paper.authors} &nbsp;|&nbsp; <b>Pages:</b> {paper.total_pages} &nbsp;|&nbsp; <b>Total Chunks:</b> {len(st.session_state.indexed_chunks)} &nbsp;|&nbsp; <b>Active Engine:</b> {active_vector_engine}</span>
     </div>
     """, unsafe_allow_html=True)
@@ -318,10 +317,10 @@ st.markdown("---")
 # ==========================================
 
 tab_summary, tab_qa, tab_benchmark, tab_chunks = st.tabs([
-    "📑 Grounded Summarizer",
-    "💬 Interactive Q&A (RAG)",
-    "⚖️ FAISS vs ChromaDB Benchmark",
-    "🔬 Vector Store & Chunk Explorer"
+    "Grounded Summarizer",
+    "Interactive Q&A (RAG)",
+    "FAISS vs ChromaDB Benchmark",
+    "Vector Store & Chunk Explorer"
 ])
 
 
@@ -329,7 +328,7 @@ tab_summary, tab_qa, tab_benchmark, tab_chunks = st.tabs([
 # TAB 1: Grounded Paper Summarizer
 # ------------------------------------------
 with tab_summary:
-    st.markdown("### 📑 Grounded Research Paper Summarization")
+    st.markdown("### Grounded Research Paper Summarization")
     st.write(f"Generates multi-aspect academic summaries for **{paper.title if paper else 'the paper'}**, strictly grounded in retrieved sections.")
 
     col_opt1, col_opt2 = st.columns([2, 1])
@@ -340,7 +339,7 @@ with tab_summary:
             horizontal=True
         )
     with col_opt2:
-        generate_sum_btn = st.button("✨ Generate Summary", type="primary", use_container_width=True)
+        generate_sum_btn = st.button("Generate Summary", type="primary", use_container_width=True)
 
     mode_key = "multi_section" if "Comprehensive" in summary_mode else "executive"
 
@@ -359,7 +358,7 @@ with tab_summary:
         st.markdown(cached_res.summary_text)
 
         st.download_button(
-            label="📥 Download Summary as Markdown (.md)",
+            label="Download Summary as Markdown (.md)",
             data=cached_res.summary_text,
             file_name=f"{os.path.splitext(paper.file_name)[0]}_summary.md",
             mime="text/markdown"
@@ -372,7 +371,7 @@ with tab_summary:
 # TAB 2: Interactive Q&A (RAG)
 # ------------------------------------------
 with tab_qa:
-    st.markdown("### 💬 Paper-Specific Grounded Question Answering")
+    st.markdown("### Paper-Specific Grounded Question Answering")
     st.write(f"Ask any question about **{paper.title if paper else 'the paper'}**. Answers cite exact pages, sections, and similarity scores.")
 
     # Quick prompt buttons
@@ -401,7 +400,7 @@ with tab_qa:
         with st.chat_message("assistant"):
             st.markdown(chat["answer"])
             if chat.get("citations"):
-                with st.expander(f"📚 {len(chat['citations'])} Verified Citations & Retrieved Chunks ({chat.get('engine', 'FAISS')})"):
+                with st.expander(f"{len(chat['citations'])} Verified Citations & Retrieved Chunks ({chat.get('engine', 'FAISS')})"):
                     for c in chat["citations"]:
                         st.markdown(f"**Page {c.page} — {c.section}** *(Cosine Similarity: {c.similarity * 100:.1f}%)*")
                         st.caption(f'"{c.preview}"')
@@ -421,10 +420,10 @@ with tab_qa:
             st.markdown(res.answer)
 
             # Metadata info pill
-            st.caption(f"⚡ Retrieval: {res.retrieval_latency_ms} ms | 🧠 Generation: {res.generation_latency_ms} ms | Engine: {res.engine_used} | Top Similarity: {res.top_similarity * 100:.1f}%")
+            st.caption(f"Retrieval: {res.retrieval_latency_ms} ms | Generation: {res.generation_latency_ms} ms | Engine: {res.engine_used} | Top Similarity: {res.top_similarity * 100:.1f}%")
 
             if res.citations:
-                with st.expander(f"📚 {len(res.citations)} Verified Citations & Retrieved Chunks"):
+                with st.expander(f"{len(res.citations)} Verified Citations & Retrieved Chunks"):
                     for c in res.citations:
                         st.markdown(f"**Page {c.page} — {c.section}** *(Similarity: {c.similarity * 100:.1f}%)*")
                         st.caption(f'"{c.preview}"')
@@ -443,10 +442,10 @@ with tab_qa:
 # TAB 3: FAISS vs ChromaDB Benchmark
 # ------------------------------------------
 with tab_benchmark:
-    st.markdown("### ⚖️ FAISS vs ChromaDB Head-to-Head Benchmark")
+    st.markdown("### FAISS vs ChromaDB Head-to-Head Benchmark")
     st.write(f"Compare retrieval speed, top similarity scores, and chunk overlap on **{paper.title if paper else 'the paper'}** across both engines.")
 
-    if st.button("🚀 Run Vector Store Benchmark", type="primary"):
+    if st.button("Run Vector Store Benchmark", type="primary"):
         if store_mgr:
             benchmarker = VectorStoreBenchmark(store_manager=store_mgr)
             with st.spinner("Benchmarking FAISS vs ChromaDB over test queries..."):
@@ -500,7 +499,7 @@ with tab_benchmark:
 # TAB 4: Vector Store & Chunk Explorer
 # ------------------------------------------
 with tab_chunks:
-    st.markdown("### 🔬 Vector Store & Chunk Inspector")
+    st.markdown("### Vector Store & Chunk Inspector")
     st.write(f"Inspect all indexed chunks, scientific sections, and character distributions for **{paper.title if paper else 'the paper'}**.")
 
     if st.session_state.indexed_chunks:

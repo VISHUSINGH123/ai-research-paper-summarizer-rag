@@ -229,16 +229,16 @@ class LLMProvider:
         p_innovation = paragraphs[1] if len(paragraphs) > 1 else "The authors formulate a targeted, parameter-efficient architectural mechanism."
         p_results = paragraphs[2] if len(paragraphs) > 2 else "Empirical evaluations reveal state-of-the-art benchmark gains and efficiency."
 
-        return f"""### 🎯 Executive Overview
+        return f"""### Executive Overview
 {p_overview}
 
-### 🌟 Key Innovation
+### Key Innovation
 {p_innovation}
 
-### 📊 Principal Findings & Benchmarks
+### Principal Findings & Benchmarks
 {p_results}
 
-### 💡 Practical Impact
+### Practical Impact
 The proposed architecture eliminates computational bottlenecks, enabling significantly faster inference/training, reduced parameter footprints, and enhanced generalization across standard benchmarks."""
 
     def _synthesize_multi_section(self, context: str) -> str:
