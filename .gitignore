@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cache and local vector databases
+data/cache/
+*.faiss
+*.pkl
+.chroma/
+
+# Environment and sensitive data
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# Streamlit logs and local cache
+.streamlit/secrets.toml
+
+# IDE and OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+Thumbs.db
+Desktop.ini
+.DS_Store
